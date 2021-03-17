@@ -35,6 +35,7 @@ from .builders.fallback import Fallback
 from .builders.ghdl import GHDL
 from .builders.msim import MSim
 from .builders.xvhdl import XVHDL
+from .builders.xvlog import XVLOG
 
 from hdl_checker.parser_utils import findRtlSourcesByPath
 from hdl_checker.parsers.elements.identifier import Identifier
@@ -56,7 +57,7 @@ except ImportError:  # pragma: no cover
 
 _logger = logging.getLogger(__name__)
 
-AnyValidBuilder = Union[MSim, XVHDL, GHDL]
+AnyValidBuilder = Union[MSim, XVLOG, XVHDL, GHDL]
 AnyBuilder = Union[AnyValidBuilder, Fallback]
 
 
@@ -67,6 +68,7 @@ class BuilderName(Enum):
 
     msim = MSim.builder_name
     xvhdl = XVHDL.builder_name
+    xvlog = XVLOG.builder_name
     ghdl = GHDL.builder_name
     fallback = Fallback.builder_name
 
@@ -79,6 +81,8 @@ def getBuilderByName(name):
         builder = MSim
     elif name == "xvhdl":
         builder = XVHDL
+    elif name == "xvlog":
+        builder = XVLOG
     elif name == "ghdl":
         builder = GHDL
     else:
@@ -204,4 +208,4 @@ def _getSourcesFromVUnitModule(vunit_module):
 __all__ = ["MSim", "XVHDL", "GHDL", "Fallback"]
 
 # This holds the builders in order of preference
-AVAILABLE_BUILDERS = MSim, XVHDL, GHDL, Fallback
+AVAILABLE_BUILDERS = MSim, XVLOG, XVHDL, GHDL, Fallback

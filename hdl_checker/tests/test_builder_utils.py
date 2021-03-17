@@ -38,6 +38,7 @@ from hdl_checker.builders.fallback import Fallback
 from hdl_checker.builders.ghdl import GHDL
 from hdl_checker.builders.msim import MSim
 from hdl_checker.builders.xvhdl import XVHDL
+from hdl_checker.builders.xvlog import XVLOG
 from hdl_checker.path import Path
 from hdl_checker.types import FileType
 
@@ -56,6 +57,7 @@ class TestBuilderUtils(TestCase):
     def test_getBuilderByName(self):
         self.assertEqual(getBuilderByName("msim"), MSim)
         self.assertEqual(getBuilderByName("xvhdl"), XVHDL)
+        self.assertEqual(getBuilderByName("xvlog"), XVLOG)
         self.assertEqual(getBuilderByName("ghdl"), GHDL)
         self.assertEqual(getBuilderByName("other"), Fallback)
 
