@@ -187,6 +187,8 @@ def _expand(config, ref_path):
     Expands the sources defined in the config dict into a list of tuples
     """
 
+    _logger.info("Starting expand")
+
     flags = {}
 
     for filetype in FileType:
@@ -199,12 +201,15 @@ def _expand(config, ref_path):
 
     sources = config.pop("sources", None)
 
+    _logger.info("Sources: %s", str(sources))
+
     # If no sources were defined, search ref_path
-    if sources is None:
-        _logger.debug("No sources found, will search %s", ref_path)
+    if sources is None or len(sources) == 0:
+        _logger.info("No sources found, will search %s", ref_path)
         sources = (x.name for x in findRtlSourcesByPath(Path(ref_path)))
 
     for entry in sources:
+        _logger.info("Search %s", entry)
         source = JsonSourceEntry.make(entry)
         path_expr = (
             source.path_expr
@@ -215,8 +220,11 @@ def _expand(config, ref_path):
         for _path in glob(path_expr, recursive=True):
             path = Path(_path, ref_path)
 
+            #_logger.info("  path: %s", str(path))
+
             try:
                 filetype = FileType.fromPath(path)
+                #_logger.info("    included")
 
                 single_flags = flags[filetype][0]
                 dependencies_flags = flags[filetype][1]

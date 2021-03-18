@@ -218,7 +218,7 @@ class HdlCheckerCore:
         # type: (Dict[Any, Any]) -> None
         "Updates configuration from a dictionary"
 
-        _logger.debug("Updating with base config:\n%s", pformat(config))
+        _logger.info("Updating with base config:\n%s", pformat(config))
 
         builder_name = config.pop("builder", None)
         if builder_name is not None:
@@ -230,6 +230,8 @@ class HdlCheckerCore:
 
         self._builder = builder_cls(self.work_dir, self._database)
 
+        _logger.info('root dir is %s and conf looks like %s', str(self.root_dir), str(config.keys()))
+        _logger.info('sources: %s', str(config['sources']))
         sources_added = self._database.configure(config, str(self.root_dir))
         # Add VUnit
         if not isinstance(self._builder, Fallback):

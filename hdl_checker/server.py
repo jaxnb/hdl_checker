@@ -211,7 +211,7 @@ def run(args):
         Timer(2, _watchPidWrapper).start()
 
     _logger.info(
-        "Starting server. Our PID is %s, %s. Version string for hdl_checker is '%s'",
+        "Starting server. Our PID is %s, %s. Version string for hdl_checker is '%s' and 5",
         os.getpid(),
         "no parent PID to attach to"
         if args.attach_to_pid is None

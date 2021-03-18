@@ -328,7 +328,9 @@ class BaseBuilder(object):  # pylint: disable=useless-object-inheritance
         diagnostics = set()  # type: Set[CheckerDiagnostic]
         rebuilds = set()  # type: Set[RebuildInfo]
 
-        for line in self._buildSource(path, library, flags=flags):
+        buildlines = self._buildSource(path, library, flags=flags)
+        self._logger.info('------------ Build results: -----------\n%s\n---------------------------------', '\n'.join(buildlines))
+        for line in buildlines:
             if self._shouldIgnoreLine(line):
                 continue
 

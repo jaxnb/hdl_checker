@@ -254,7 +254,7 @@ def runShellCommand(cmd_with_args, shell=False, env=None, cwd=None):
     """
     Runs a shell command and handles stdout catching
     """
-    _logger.debug(" ".join(cmd_with_args))
+    _logger.info('(%s)' + " ".join(cmd_with_args), str(cwd))
 
     try:
         return (

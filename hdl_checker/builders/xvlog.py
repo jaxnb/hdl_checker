@@ -157,6 +157,7 @@ class XVLOG(BaseBuilder):
         # type: (Path, Identifier, Optional[BuildFlags]) -> Iterable[str]
         cmd = [
             "xvlog",
+            "-sv",
             "--nolog",
             "--verbose",
             "0",
